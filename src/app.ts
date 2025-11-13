@@ -8,8 +8,7 @@ const app = express();
 
 app.use(express.json());
 
-app.use(errorHandlingMiddleware);
-
 app.use(router);
+app.use(errorHandlingMiddleware);
 
 export { app };

@@ -9,8 +9,8 @@ class UserController {
 
         const createUserBody = z.object({
             name: z.string().trim().min(2),
-            email: z.string().email(),
-            password: z.string().min(6)
+            email: z.string().trim().email(),
+            password: z.string().trim().min(6)
         })
 
         const { name, email, password } = createUserBody.parse(req.body)
@@ -34,6 +34,8 @@ class UserController {
         return res.status(201).json({ message: 'User created successfully', userWhithoutPassord });
 
     }
+
+    
 }
 
 export { UserController };
