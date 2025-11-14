@@ -30,8 +30,8 @@ class UserController {
                 password: hashedPassword
             }
         });
-        const {password: _, ...userWhithoutPassord} = user;
-        return res.status(201).json({ message: 'User created successfully', userWhithoutPassord });
+        const {password: _, ...userWhithoutPassword} = user;
+        return res.status(201).json({ message: 'User created successfully', userWhithoutPassword });
 
     }
 
