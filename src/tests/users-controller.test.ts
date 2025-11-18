@@ -2,7 +2,6 @@ import request from "supertest";
 import { prisma } from "../database/prisma";
 
 import { app } from "../app";
-import exp from "constants";
 
 describe("UsersController", () => {
     let user_id: string;
@@ -19,7 +18,6 @@ describe("UsersController", () => {
         expect(response.body.userWhithoutPassword).toHaveProperty("id");
         expect(response.body.userWhithoutPassword.name).toBe("test");
 
-        console.log(response.body);
         const user = response.body.userWhithoutPassword
         user_id = user.id
     });
