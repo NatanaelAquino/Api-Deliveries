@@ -25,7 +25,9 @@ class DeliveryLogsController {
         if (!delivery) {
             throw new AppError("Entrega não encontrada.", 404);
         }
-
+        if(delivery.status === "delivered") {
+            throw new AppError("Entregas finalizadas não podem receber novos logs.");
+        }
         if (delivery.status === "processing") {
             throw new AppError("change status to shipped");
         }
@@ -50,10 +52,17 @@ class DeliveryLogsController {
             where: {
                 id: delivery_id,
             },
+            include: {
+                user: true,
+                logs: true,
+            },
         });
-        if (req.user?.role === "customer" && req.user?.id !== delivery?.userId) {
-            throw new AppError("Unauthorized", 403);
 
+        console.log(req.user?.role === "customer" );
+        console.log( req.user?.id !== delivery?.userId);
+
+        if (req.user?.role === "customer" && req.user?.id === delivery?.userId) {
+            throw new AppError("Unauthorized", 403);
         }
         return res.json(delivery);
     }
