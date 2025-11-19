@@ -1,5 +1,6 @@
 import { app } from "@/app";
-const port = 3000;
+import { env } from "./env";
+const port = env.PORT;
 
 
 app.listen(port, () => {
